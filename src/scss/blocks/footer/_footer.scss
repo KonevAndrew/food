@@ -13,10 +13,14 @@
         font-size: 20px;
     }
     .link {
-        display: block;
+        display: flex;
+        align-items: center;
         margin-top: 15px;
         font-size: 16px;
         color: #fff;
+        span {
+            padding-left: 8px;
+        }
     }
     .call {
         text-align: right;

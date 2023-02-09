@@ -4,8 +4,11 @@
     cursor: pointer;
     position: absolute;
     right: 30px;
+    top: 52px;
     z-index: 5;
-    display: none;
+    &__wrapper {
+        display: none;
+    }
 
     &__menu {
         display: flex;
@@ -15,7 +18,7 @@
         position: fixed;
         top: 0;
         right: -100%;
-        width: 50%;
+        min-width: 50%;
         height: 100vh;
         padding: 20px 15px;
         background-color: rgba(249, 254, 126, 0.85);

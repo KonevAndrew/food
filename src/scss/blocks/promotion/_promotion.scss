@@ -3,6 +3,7 @@
     position: relative;
     .container {
         display: flex;
+        flex-direction: row;
     }
     .bgc_y {
         position: absolute;

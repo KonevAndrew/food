@@ -8,8 +8,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const burger = document.querySelector(".burger");
   const burgerMenu = document.querySelector(".burger__menu");
   const body = document.querySelector("body");
+  const activity = document.querySelector(".calculating__choose_big");
+  const activityBtn = activity.querySelectorAll(".calculating__choose-item");
 
-  //перевлючение табов
+  //переключение табов
 
   function hideTabContent() {
     tabsContent.forEach((item) => {
@@ -42,6 +44,79 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+  //калькулятор каллорий
+
+  activity.addEventListener("click", (event) => {
+    activityBtn.forEach((item) => {
+      item.classList.remove("calculating__choose-item_active");
+    });
+    if (event.target && event.target.classList.contains("calculating__choose-item")) {
+      event.target.classList.add("calculating__choose-item_active");
+    }
+  });
+
+  //таймер
+
+  const deadLine = "2023-01-23";
+
+  function getTime(endtime) {
+    let days, hourses, minutes, seconds;
+    const time = Date.parse(endtime) - Date.parse(new Date());
+
+    if (time <= 0) {
+      days = 0;
+      hourses = 0;
+      minutes = 0;
+      seconds = 0;
+    } else {
+      days = Math.floor(time / (1000 * 60 * 60 * 24));
+      hourses = Math.floor((time / (1000 * 60 * 60)) % 24);
+      minutes = Math.floor((time / 1000 / 60) % 60);
+      seconds = Math.floor((time / 1000) % 60);
+    }
+
+    return {
+      total: time,
+      days: days,
+      hourses: hourses,
+      minutes: minutes,
+      seconds: seconds,
+    };
+  }
+
+  function getZero(num) {
+    if (num >= 0 && num < 10) {
+      return `0${num}`;
+    } else {
+      return num;
+    }
+  }
+
+  function setClock(selector, endtime) {
+    const timer = document.querySelector(selector);
+    const days = timer.querySelector("#days");
+    const hourse = timer.querySelector("#hours");
+    const minutes = timer.querySelector("#minutes");
+    const seconds = timer.querySelector("#seconds");
+    const timeInterval = setInterval(upDateClock, 1000);
+
+    upDateClock();
+
+    function upDateClock() {
+      const t = getTime(endtime);
+      days.innerHTML = getZero(t.days);
+      hourse.innerHTML = getZero(t.hourses);
+      minutes.innerHTML = getZero(t.minutes);
+      seconds.innerHTML = getZero(t.seconds);
+
+      if (total.time <= 0) {
+        clearInterval(timeInterval);
+      }
+    }
+  }
+
+  setClock(".timer", deadLine);
 
   //скрытие бургера при клике вне элемента
 
